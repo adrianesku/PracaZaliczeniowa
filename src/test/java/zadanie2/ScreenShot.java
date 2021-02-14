@@ -25,7 +25,7 @@ public class ScreenShot {
         File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
 
         //Move image file to new destination
-        File DestFile = new File("c://test.png");
+        File DestFile = new File("PotwierdzenieZamowienia.png");
 
         //Copy file at destination
         FileUtils.copyFile(SrcFile, DestFile);
