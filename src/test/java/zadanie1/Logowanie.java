@@ -123,7 +123,6 @@ public class Logowanie {
     public void usuniecieAdresu() {
         // znajdź elementy typu "article" na stronie
         List<WebElement> lista = driver.findElements(By.tagName("article"));
-        // wyświetl ile elmentów zostało znalezionych
         WebElement element = driver.findElement(By.xpath("html/body/main/section/div/div/section/section/div[" + (lista.size() - 1) + "]/article/div[2]/a[2]/span"));
         element.click();
     }

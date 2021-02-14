@@ -9,6 +9,7 @@ import java.util.List;
 public class SearchPage {
     private static WebDriver driver;
 
+    // konstruktor do sterowników
     public SearchPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -22,11 +23,13 @@ public class SearchPage {
         search.submit();
     }
 
+    // metoda do wybrania towaru
     public void selectProduct(String product) {
         WebElement search = driver.findElement(By.partialLinkText(product));
         search.click();
     }
 
+    // sprawdzenie czy jest rabat na produkcie
     public void checkDiscount(){
         List<WebElement> lista = driver.findElements(By.className("discount discount-percentage"));
 

@@ -4,7 +4,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.hu.De;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -31,40 +30,44 @@ public class ZadanieTest {
 
         @When("Logowanie do sklepu loginem {string} i hasłem {string}")
         public void logowanie(String email, String haslo) {
+                // stworzenie obikeut z klasy LoginPage, który ma na celu zalogowanie się do sklepu
                 LoginPage loginPage = new LoginPage(driver);
                 loginPage.loginAs(email, haslo);
         }
 
         @And("Wyszukanie i wybranie towaru {string}")
         public void wyszukanieTowaru(String searchProduct) {
+                // stworzenie obikeut z klasy SearchPage, który ma znaleźć i wybrać towar oraz sprawdzić ewentualną zniżkę
                 SearchPage searchPage = new SearchPage(driver);
                 searchPage.searchProduct(searchProduct);
                 searchPage.selectProduct(searchProduct);
                 searchPage.checkDiscount();
         }
 
-        @And("Wybranie rozmiaru {string} i ilości {string} oraz dodanie do koszyka")
+        @And("Wybranie rozmiaru {string} i ilości {string} oraz dodanie do koszyka i przejśćie do checkout")
         public void szczegolyZamowienia(String rozmiar, String ilosc) {
+                // stworzenie obikeut z klasy DetailsPage, który ma na celu ustalić szczegóły zamówienia i przejść do realizacji zamówienia
                 DetailsPage detailsPage = new DetailsPage(driver);
                 detailsPage.setSize(rozmiar);
                 detailsPage.setQuantity(ilosc);
                 detailsPage.addToCart();
+                detailsPage.goToCheckout();
         }
 
-
-        @And("Uzupełnienie danych do zamówienia")
-        public void c() {
-
-        }
-
-        @And("Potwierdzenie zamówienia")
-        public void d() {
-
+        @And("Uzupełnienie informacji o płątności i dostawie")
+        public void szczegolyDostawy() {
+                // stworzenie obikeut z klasy OrderPage, który ma na celu przejśćie przez szczegóły realizacji dostawy i płatności
+                OrderPage orderPage = new OrderPage(driver);
+                orderPage.setAddress();
+                orderPage.setShippingMethod();
+                orderPage.setPayment();
         }
 
         @Then("Potwierdzenie zamówienie w formie screenshota")
-        public void e() {
-
+        public void potwierdzenieZamowienia() throws Exception {
+                // stworzenie obikeut z klasy ScreenShot, który ma na celu zrobić screenshot z potwierdzeniem zamówienia
+                ScreenShot screenshot = new ScreenShot(driver);
+                screenshot.takeSnapShot();
         }
 
     }

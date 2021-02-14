@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 public class LoginPage {
     private static WebDriver driver;
 
+    // konstruktor do sterowników
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
