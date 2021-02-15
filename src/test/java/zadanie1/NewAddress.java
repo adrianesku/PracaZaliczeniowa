@@ -1,5 +1,6 @@
 package zadanie1;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -9,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -44,12 +44,14 @@ public class NewAddress {
 
     @And("Przejście do edycji adresu")
     public void przejscieDoEdycji() {
+        // użycie metody z clasy PageMenu która pozwoli na przejśćie w menu do edycji adresu
         PageMenu pageMenu = new PageMenu(driver);
         pageMenu.przejscieDoEdycjiAdresu();
     }
 
     @And("Wypełnienie formularza danymi: {string} {string} {string} {string} {string} {string} i dodanie nowego adresu")
     public void nowyAdres(String alias, String address, String city, String zip, String country, String phone) {
+        // użycie metody z clasy PageNewAddress która pozwoli na wypełnienie formularza i dodanie adresu
         PageNewAddress pageNewAddress = new PageNewAddress(driver);
         pageNewAddress.dodawanieAdresu(alias,address,city,zip,country,phone);
     }
@@ -71,17 +73,13 @@ public class NewAddress {
             System.out.println("===============================================================");
         }
     }
-
-    @And("Usuniecie dodanego adresu")
+    @After
     public void usuniecieAdresu() {
         // znajdź elementy typu "article" na stronie
         List<WebElement> lista = driver.findElements(By.tagName("article"));
         WebElement element = driver.findElement(By.xpath("html/body/main/section/div/div/section/section/div[" + (lista.size() - 1) + "]/article/div[2]/a[2]/span"));
         element.click();
-    }
 
-    @And("Potwierdzenie usuniecia adresu")
-    public void potwierdzenieUsunieciaAdresu() {
         WebElement komunikat = driver.findElement(By.xpath("html/body/main/section/div/div/section/section/aside/div/article/ul/li"));
         //WebElement komunikat = driver.findElement(By.linkText("Address successfully deleted!"));
 

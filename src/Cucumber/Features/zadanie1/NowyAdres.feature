@@ -8,8 +8,7 @@ Feature: Dodawanie nowego adresu
     And Przejście do edycji adresu
     And Wypełnienie formularza danymi: "<alias>" "<address>" "<city>" "<zip>" "<country>" "<phone>" i dodanie nowego adresu
     Then Informacja o prawidłowym dodaniu adresu
-    And Usuniecie dodanego adresu
-    And Potwierdzenie usuniecia adresu
+
 
     Examples:
     | alias      | address     | city        | zip    | country        | phone       |
