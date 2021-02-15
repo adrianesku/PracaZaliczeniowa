@@ -15,7 +15,7 @@ public class ZadanieTest {
         WebDriver driver;
 
         @Given("Otwarta strona logowania do sklepu")
-        public void otwarcieStrony() {
+        public void otwarcieStronySklepu() {
                 // Skonfiguruj sterownik przeglądarki
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
                 // Uruchom nowy egzemplarz przeglądarki Chrome
@@ -29,7 +29,7 @@ public class ZadanieTest {
         }
 
         @When("Logowanie do sklepu loginem {string} i hasłem {string}")
-        public void logowanie(String email, String haslo) {
+        public void logowanieDoSklepu(String email, String haslo) {
                 // stworzenie obikeut z klasy LoginPage, który ma na celu zalogowanie się do sklepu
                 LoginPage loginPage = new LoginPage(driver);
                 loginPage.loginAs(email, haslo);
