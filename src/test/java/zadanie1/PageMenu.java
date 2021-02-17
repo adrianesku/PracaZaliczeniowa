@@ -27,7 +27,7 @@ public class PageMenu {
     @FindBy(partialLinkText = "Create new address")
     WebElement elementCreateNewAcc;
 
-    public void przejscieDoEdycjiAdresu() {
+    public void goToEditAddress() {
         List<WebElement> lista = driver.findElements(By.id("addresses-link"));
 
         // sprawdzenie czy są już dodane jakieś adressy
@@ -43,4 +43,5 @@ public class PageMenu {
             elementAddress.click();
         }
     }
+
 }

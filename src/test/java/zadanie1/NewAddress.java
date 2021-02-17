@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,66 +31,50 @@ public class NewAddress {
     }
 
     @Given("Otwarta strona logowania do sklepu")
-    public void otwarcieStrony() {
+    public void openWebsite() {
         // Przejdź do sklepu
         driver.get("https://prod-kurs.coderslab.pl/index.php?controller=authentication&back=my-account");
     }
 
     @When("Wpisanie prawidłowego loginu {string} oraz hasła {string}")
-    public void logowanie(String email, String haslo) {
+    public void login(String email, String password) {
         // użycie metody z clasy PageLogin która pozwoli na zalgowanie się na stronę
         PageLogin pageLogin = new PageLogin(driver);
-        pageLogin.logowanieNaStrone(email,haslo);
+        pageLogin.login(email,password);
     }
 
     @And("Przejście do edycji adresu")
-    public void przejscieDoEdycji() {
+    public void goToEditAddress() {
         // użycie metody z clasy PageMenu która pozwoli na przejśćie w menu do edycji adresu
         PageMenu pageMenu = new PageMenu(driver);
-        pageMenu.przejscieDoEdycjiAdresu();
+        pageMenu.goToEditAddress();
     }
 
     @And("Wypełnienie formularza danymi: {string} {string} {string} {string} {string} {string} i dodanie nowego adresu")
-    public void nowyAdres(String alias, String address, String city, String zip, String country, String phone) {
+    public void addAddress(String alias, String address, String city, String zip, String country, String phone) {
         // użycie metody z clasy PageNewAddress która pozwoli na wypełnienie formularza i dodanie adresu
         PageNewAddress pageNewAddress = new PageNewAddress(driver);
-        pageNewAddress.dodawanieAdresu(alias,address,city,zip,country,phone);
+        pageNewAddress.addAddress(alias,address,city,zip,country,phone);
     }
 
-    @Then("Informacja o prawidłowym dodaniu adresu")
-    public void potwierdzenieDodaniaAdresu() {
-
-        WebElement komunikat = driver.findElement(By.xpath("html/body/main/section/div/div/section/section/aside/div/article/ul/li"));
-        //WebElement komunikat = driver.findElement(By.linkText("Address successfully added!"));
-        List<WebElement> lista = driver.findElements(By.tagName("article"));
-        System.out.println("Lista zawiera: " + lista.size() + " elementów");
-
-        //sprawdzenie czy pojawił się komunikat potwierdzający oraz czy konto zawiera conajmniej jeden adres
-        if (komunikat.isDisplayed() && lista.size()>0) {
-            System.out.println("Prawidłowo dodano adres");
-            System.out.println("===============================================================");
-        } else {
-            System.out.println("Coś poszło nie tak");
-            System.out.println("===============================================================");
+    @Then("Informacja o prawidłowym dodaniu adresu {string}")
+    public void verficationAddAddress(String message) {
+        // użycie metody z clasy PageAddressMenu, która pozwoli na sprawdzenie komunikatu
+            PageAdrdessMenu pageAdrdessMenu = new PageAdrdessMenu(driver);
+            Assert.assertEquals(message, pageAdrdessMenu.getUpdateInformation());
         }
-    }
+
     @After
-    public void usuniecieAdresu() {
-        // znajdź elementy typu "article" na stronie
+    public void exitTest() {
+        // znajdź elementy typu "article" na stronie i usuń ostatni element (najonowszy adres)
         List<WebElement> lista = driver.findElements(By.tagName("article"));
         WebElement element = driver.findElement(By.xpath("html/body/main/section/div/div/section/section/div[" + (lista.size() - 1) + "]/article/div[2]/a[2]/span"));
         element.click();
+        // użycie metody z clasy PageAddressMenu, która pozwoli na sprawdzenie komunikatu
+        PageAdrdessMenu pageAdrdessMenu = new PageAdrdessMenu(driver);
+        Assert.assertEquals("Address successfully deleted!", pageAdrdessMenu.getUpdateInformation());
 
-        WebElement komunikat = driver.findElement(By.xpath("html/body/main/section/div/div/section/section/aside/div/article/ul/li"));
-        //WebElement komunikat = driver.findElement(By.linkText("Address successfully deleted!"));
-
-        //sprawdzenie czy pojawił się komunikat potwierdzający oraz czy konto zawiera conajmniej jeden adres
-        if (komunikat.isDisplayed()) {
-            System.out.println("Prawidłowo usunięto adres");
-            System.out.println("===============================================================");
-        } else {
-            System.out.println("Coś poszło nie tak");
-            System.out.println("===============================================================");
-        }
+        // Zamknij przeglądarkę
+        driver.quit();
     }
 }

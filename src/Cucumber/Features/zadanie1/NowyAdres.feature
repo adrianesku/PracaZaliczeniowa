@@ -7,7 +7,7 @@ Feature: Dodawanie nowego adresu
     When Wpisanie prawidłowego loginu "Testowy@wp.pl" oraz hasła "Test123"
     And Przejście do edycji adresu
     And Wypełnienie formularza danymi: "<alias>" "<address>" "<city>" "<zip>" "<country>" "<phone>" i dodanie nowego adresu
-    Then Informacja o prawidłowym dodaniu adresu
+    Then Informacja o prawidłowym dodaniu adresu "Address successfully added!"
 
 
     Examples:

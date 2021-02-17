@@ -26,7 +26,7 @@ public class PageLogin {
     WebElement elementSubmit;
 
     // metoda do logowania wg. zmiennych e-mail i password
-    public void logowanieNaStrone(String email, String password) {
+    public void login(String email, String password) {
         // wpisanie e-maila
         elementEmail.click();
         elementEmail.clear();

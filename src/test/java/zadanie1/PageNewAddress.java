@@ -36,7 +36,7 @@ public class PageNewAddress {
     WebElement elementSubmitAddress;
 
 
-    public void dodawanieAdresu(String alias, String address, String city, String zip, String country, String phone) {
+    public void addAddress(String alias, String address, String city, String zip, String country, String phone) {
         // wpisanie aliasu
         elementAlias.click();
         elementAlias.clear();
