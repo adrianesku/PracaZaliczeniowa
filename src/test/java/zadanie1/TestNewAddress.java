@@ -15,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class NewAddress {
+public class TestNewAddress {
     WebDriver driver;
 
     @Before

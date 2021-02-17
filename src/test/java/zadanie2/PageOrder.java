@@ -8,10 +8,10 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 
-public class OrderPage {
+public class PageOrder {
     private static WebDriver driver;
 
-    public OrderPage(WebDriver driver) {
+    public PageOrder(WebDriver driver) {
         this.driver = driver;
     }
     public void setAddress(){

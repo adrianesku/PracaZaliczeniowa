@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class DetailsPage {
+public class PageDetails {
     private static WebDriver driver;
 
     // konstruktor do sterowników
-    public DetailsPage(WebDriver driver) {
+    public PageDetails(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -29,7 +29,7 @@ public class DetailsPage {
 
     // metoda dodająca towar do koszyku
     public void addToCart(){
-        WebElement cart = driver.findElement(By.xpath("/html/body/main/section/div/div/section/div[1]/div[2]/div[2]/div[2]/form/div[2]/div/div[2]/button"));
+        WebElement cart = driver.findElement(By.cssSelector(".add-to-cart"));
         cart.click();
     }
 
